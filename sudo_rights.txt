@@ -31,7 +31,7 @@ echo "1 \"Sudo Users in sudoers\" - Root rights are granted to $COUNTSUDOERS use
 else
 
 # if the sudoers.d directory has greater than 1 file make a warning
-    if [ $COUNT -gt 1 ]
+    if [ $COUNT -gt 0 ]
     then
         echo "1 \"Sudo Users in sudoers.d \" - Root rights are granted to $COUNT users : $SUDOERSD"
 # if any sudoers directory or file has less stay in OK status
