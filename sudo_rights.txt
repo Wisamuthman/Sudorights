@@ -3,11 +3,7 @@
 # This file is part of Checkmk (https://checkmk.com). It is subject to the terms and
 # conditions defined in the file COPYING, which is part of this source code package.
 
-# Reason for this no-op: shellcheck disable=... before the first command disables the error for the
-# entire script.
-
 # Disable unused variable error (needed to keep track of version)
-# shellcheck disable=SC2034
 # Made by Wisam Uthman
 
 
@@ -30,7 +26,7 @@ echo "1 \"Sudo Users in sudoers\" - Root rights are granted to $COUNTSUDOERS use
 
 else
 
-# if the sudoers.d directory has greater than 1 file make a warning
+# if the sudoers.d directory has greater than 0 file make a warning
     if [ $COUNT -gt 0 ]
     then
         echo "1 \"Sudo Users in sudoers.d \" - Root rights are granted to $COUNT users : $SUDOERSD"
