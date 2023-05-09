@@ -16,8 +16,7 @@ SUDOERSACCESS=$(cat /etc/sudoers | grep -vE "#|root|%wheel" | grep "ALL=" |awk '
 COUNTSUDOERS=$(cat /etc/sudoers | grep -vE "#|root|%wheel" | grep "ALL=" |awk '{print $1}' |awk -F ':' '{print $1}'|wc -w)
 SUDOERSD=$(cd /etc/sudoers.d && ls -l /etc/sudoers.d | grep -rE "/bin/su -|/usr/bin/su -|ALL" |awk '{print $1}' |awk -F ':' '{printf "%s,", $1}')
 COUNT=$(cd /etc/sudoers.d && ls -l /etc/sudoers.d | grep -rE "/bin/su -|/usr/bin/su -|ALL" |wc -l)
-VALUE=1
-SUBSTRACTEDVALUE=$((COUNT - VALUE))
+
 
 #if sudoers file has more than 0 root account make a warning alert
 
@@ -33,7 +32,7 @@ else
 # if the sudoers.d directory has greater than 1 file make a warning
     if [ $COUNT -gt 1 ]
     then
-        echo "1 \"Sudo Users in sudoers.d \" - Root rights are granted to $SUBSTRACTEDVALUE users : $SUDOERSD"
+        echo "1 \"Sudo Users in sudoers.d \" - Root rights are granted to $COUNT users : $SUDOERSD"
 # if any sudoers directory or file has less stay in OK status
         else
                 echo "0 \"Sudo Users service \" - Root rights are not granted to anyone"
