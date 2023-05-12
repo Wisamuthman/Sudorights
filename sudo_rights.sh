@@ -8,10 +8,10 @@
 
 
 
-SUDOERSACCESS=$(cat /etc/sudoers | grep -vE "#|root|%wheel" | grep "ALL=" |awk '{print $1}' |awk -F ':' '{printf "%s ", $1}')
-COUNTSUDOERS=$(cat /etc/sudoers | grep -vE "#|root|%wheel" | grep "ALL=" |awk '{print $1}' |awk -F ':' '{print $1}'|wc -w)
-SUDOERSD=$(cd /etc/sudoers.d && ls -l /etc/sudoers.d | grep -rE "/bin/su -|/usr/bin/su -|ALL=\(ALL\)" |awk '{print $1}' |awk -F ':' '{printf "%s ", $1}')
-COUNT=$(cd /etc/sudoers.d && ls -l /etc/sudoers.d | grep -rE "/bin/su -|/usr/bin/su -|ALL=\(ALL\)" |wc -l)
+SUDOERSACCESS=$(cat /etc/sudoers | grep -vE "#|root|%wheel" | grep -E "ALL=\(ALL\) NOPASSWD: /bin/su -|ALL=\(ALL\) NOPASSWD: /usr/bin/su -|ALL=\(ALL\) NOPASSWD: ALL " |awk '{print $1}' |awk -F ':' '{printf "%s ", $1}')
+COUNTSUDOERS=$(cat /etc/sudoers | grep -vE "#|root|%wheel" | grep -E "ALL=\(ALL\) NOPASSWD: /bin/su -|ALL=\(ALL\) NOPASSWD: /usr/bin/su -|ALL=\(ALL\) NOPASSWD: ALL " |awk '{print $1}' |awk -F ':' '{print $1}'|wc -w)
+SUDOERSD=$(cd /etc/sudoers.d && ls -l /etc/sudoers.d | grep -rE "ALL=\(ALL\) NOPASSWD: /bin/su -|ALL=\(ALL\) NOPASSWD: /usr/bin/su -|ALL=\(ALL\) NOPASSWD: ALL " |awk '{print $1}' |awk -F ':' '{printf "%s ", $1}')
+COUNT=$(cd /etc/sudoers.d && ls -l /etc/sudoers.d | grep -rE "ALL=\(ALL\) NOPASSWD: /bin/su -|ALL=\(ALL\) NOPASSWD: /usr/bin/su -|ALL=\(ALL\) NOPASSWD: ALL " |wc -l)
 
 
 #if sudoers file has more than 0 root account make a warning alert
