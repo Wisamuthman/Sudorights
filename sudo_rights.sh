@@ -7,8 +7,8 @@
 # Made by Wisam Uthman
 
 
-SUDOERSACCESS=$(cat /etc/sudoers | grep -vE "#|root|%wheel" | grep -E "ALL=NOPASSWD: /bin/su -|ALL=NOPASSWD: /usr/bin/su -|ALL=NOPASSWD: ALL |ALL=\(ALL\) NOPASSWD: /bin/su -|ALL=\(ALL\) NOPASSWD: /usr/bin/su -|ALL=\(ALL\) NOPASSWD: ALL " |awk '{print $1}' |awk -F ':' '{printf "%s ", $1}')
-COUNTSUDOERS=$(cat /etc/sudoers | grep -vE "#|root|%wheel" | grep -E "ALL=NOPASSWD: /bin/su -|ALL=NOPASSWD: /usr/bin/su -|ALL=NOPASSWD: ALL |ALL=\(ALL\) NOPASSWD: /bin/su -|ALL=\(ALL\) NOPASSWD: /usr/bin/su -|ALL=\(ALL\) NOPASSWD: ALL " |awk '{print $1}' |awk -F ':' '{print $1}'|wc -w)
+SUDOERSACCESS=$(cat /etc/sudoers | grep -vE "#|root|%wheel" | grep -E "ALL=NOPASSWD: /bin/su -|ALL=NOPASSWD: /usr/bin/su -|ALL=NOPASSWD: ALL|ALL=\(ALL\) NOPASSWD: /bin/su -|ALL=\(ALL\) NOPASSWD: /usr/bin/su -|ALL=\(ALL\) NOPASSWD: ALL"|awk '{print $1}' |awk -F ':' '{printf "%s ", $1}')
+COUNTSUDOERS=$(cat /etc/sudoers | grep -vE "#|root|%wheel" | grep -E "ALL=NOPASSWD: /bin/su -|ALL=NOPASSWD: /usr/bin/su -|ALL=NOPASSWD: ALL|ALL=\(ALL\) NOPASSWD: /bin/su -|ALL=\(ALL\) NOPASSWD: /usr/bin/su -|ALL=\(ALL\) NOPASSWD: ALL"|awk '{print $1}' |awk -F ':' '{print $1}'|wc -w)
 SUDOERSD=$(cd /etc/sudoers.d && ls -l /etc/sudoers.d | grep -rE "ALL=\(ALL\) NOPASSWD: /bin/su -($|\s|"root")|ALL=\(ALL\) NOPASSWD: /usr/bin/su -($|\s|"root")|ALL=\(ALL\) NOPASSWD: ALL($|\s|"root")"|awk '{print $1}' |awk -F ':' '{printf "%s ", $1}')
 COUNT=$(cd /etc/sudoers.d && ls -l /etc/sudoers.d | grep -rE "ALL=\(ALL\) NOPASSWD: /bin/su -($|\s|"root")|ALL=\(ALL\) NOPASSWD: /usr/bin/su -($|\s|"root")|ALL=\(ALL\) NOPASSWD: ALL($|\s|"root")"|wc -l)
 
